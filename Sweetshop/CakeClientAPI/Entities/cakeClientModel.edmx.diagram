@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9f4b7f638d604a26b5680b31d3939bad" Name="BaseDiagram" ZoomLevel="70">
+        <EntityTypeShape EntityType="cakeClientModel.Additions" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakeClientModel.Creams" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakeClientModel.Fillings" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakeClientModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakeClientModel.Crusts" Width="1.5" PointX="5.375" PointY="3.875" />
+        <EntityTypeShape EntityType="cakeClientModel.Recipe" Width="1.5" PointX="11.25" PointY="5.5" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Additions" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Additions1" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Additions2" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Creams" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Creams1" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Creams2" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Crusts" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Crusts1" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Crusts2" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Fillings" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Fillings1" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_Fillings2" />
+        <EntityTypeShape EntityType="cakeClientModel.Orders" Width="1.5" PointX="13.5" PointY="7.75" />
+        <EntityTypeShape EntityType="cakeClientModel.User" Width="1.5" PointX="3.375" PointY="7.125" />
+        <AssociationConnector Association="cakeClientModel.FK_Orders_Recipe" />
+        <AssociationConnector Association="cakeClientModel.FK_Orders_User" />
+        <AssociationConnector Association="cakeClientModel.FK_Recipe_User" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

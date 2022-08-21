@@ -1,0 +1,924 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище cakeClientModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Additions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Creams">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Crusts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fillings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="IdRecipe" Type="int" Nullable="false" />
+          <Property Name="Weight" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="TypeCrust1" Type="int" />
+          <Property Name="TypeCrust2" Type="int" />
+          <Property Name="TypeCrust3" Type="int" />
+          <Property Name="TypeFilling1" Type="int" />
+          <Property Name="TypeFilling2" Type="int" />
+          <Property Name="TypeFilling3" Type="int" />
+          <Property Name="TypeCream1" Type="int" />
+          <Property Name="TypeCream2" Type="int" />
+          <Property Name="TypeCream3" Type="int" />
+          <Property Name="TypeAddition1" Type="int" />
+          <Property Name="TypeAddition2" Type="int" />
+          <Property Name="TypeAddition3" Type="int" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Orders_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IdRecipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Additions">
+          <End Role="Additions" Type="Self.Additions" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Additions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeAddition1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Additions1">
+          <End Role="Additions" Type="Self.Additions" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Additions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeAddition2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Additions2">
+          <End Role="Additions" Type="Self.Additions" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Additions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeAddition3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Creams">
+          <End Role="Creams" Type="Self.Creams" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCream1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Creams1">
+          <End Role="Creams" Type="Self.Creams" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCream2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Creams2">
+          <End Role="Creams" Type="Self.Creams" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCream3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Crusts">
+          <End Role="Crusts" Type="Self.Crusts" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crusts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCrust1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Crusts1">
+          <End Role="Crusts" Type="Self.Crusts" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crusts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCrust2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Crusts2">
+          <End Role="Crusts" Type="Self.Crusts" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crusts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCrust3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Fillings">
+          <End Role="Fillings" Type="Self.Fillings" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fillings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeFilling1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Fillings1">
+          <End Role="Fillings" Type="Self.Fillings" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fillings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeFilling2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Fillings2">
+          <End Role="Fillings" Type="Self.Fillings" Multiplicity="0..1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fillings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeFilling3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище cakeClientModelContainer">
+          <EntitySet Name="Additions" EntityType="Self.Additions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Creams" EntityType="Self.Creams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Crusts" EntityType="Self.Crusts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fillings" EntityType="Self.Fillings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Orders_Recipe" Association="Self.FK_Orders_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_User" Association="Self.FK_Orders_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Additions" Association="Self.FK_Recipe_Additions">
+            <End Role="Additions" EntitySet="Additions" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Additions1" Association="Self.FK_Recipe_Additions1">
+            <End Role="Additions" EntitySet="Additions" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Additions2" Association="Self.FK_Recipe_Additions2">
+            <End Role="Additions" EntitySet="Additions" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Creams" Association="Self.FK_Recipe_Creams">
+            <End Role="Creams" EntitySet="Creams" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Creams1" Association="Self.FK_Recipe_Creams1">
+            <End Role="Creams" EntitySet="Creams" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Creams2" Association="Self.FK_Recipe_Creams2">
+            <End Role="Creams" EntitySet="Creams" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Crusts" Association="Self.FK_Recipe_Crusts">
+            <End Role="Crusts" EntitySet="Crusts" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Crusts1" Association="Self.FK_Recipe_Crusts1">
+            <End Role="Crusts" EntitySet="Crusts" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Crusts2" Association="Self.FK_Recipe_Crusts2">
+            <End Role="Crusts" EntitySet="Crusts" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Fillings" Association="Self.FK_Recipe_Fillings">
+            <End Role="Fillings" EntitySet="Fillings" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Fillings1" Association="Self.FK_Recipe_Fillings1">
+            <End Role="Fillings" EntitySet="Fillings" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Fillings2" Association="Self.FK_Recipe_Fillings2">
+            <End Role="Fillings" EntitySet="Fillings" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_User" Association="Self.FK_Recipe_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cakeClientModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Additions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Recipe" Relationship="cakeClientModel.FK_Recipe_Additions" FromRole="Additions" ToRole="Recipe" />
+          <NavigationProperty Name="Recipe1" Relationship="cakeClientModel.FK_Recipe_Additions1" FromRole="Additions" ToRole="Recipe" />
+          <NavigationProperty Name="Recipe2" Relationship="cakeClientModel.FK_Recipe_Additions2" FromRole="Additions" ToRole="Recipe" />
+          </EntityType>
+        <EntityType Name="Creams">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Recipe" Relationship="cakeClientModel.FK_Recipe_Creams" FromRole="Creams" ToRole="Recipe" />
+          <NavigationProperty Name="Recipe1" Relationship="cakeClientModel.FK_Recipe_Creams1" FromRole="Creams" ToRole="Recipe" />
+          <NavigationProperty Name="Recipe2" Relationship="cakeClientModel.FK_Recipe_Creams2" FromRole="Creams" ToRole="Recipe" />
+          </EntityType>
+        <EntityType Name="Fillings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Recipe" Relationship="cakeClientModel.FK_Recipe_Fillings" FromRole="Fillings" ToRole="Recipe" />
+          <NavigationProperty Name="Recipe1" Relationship="cakeClientModel.FK_Recipe_Fillings1" FromRole="Fillings" ToRole="Recipe" />
+          <NavigationProperty Name="Recipe2" Relationship="cakeClientModel.FK_Recipe_Fillings2" FromRole="Fillings" ToRole="Recipe" />
+          </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="cakeClientEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Additions" EntityType="Self.Additions" />
+          <EntitySet Name="Creams" EntityType="Self.Creams" />
+          <EntitySet Name="Fillings" EntityType="Self.Fillings" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(cakeClientModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(cakeClientModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Crusts" EntityType="cakeClientModel.Crusts" />
+          <EntitySet Name="Recipe" EntityType="cakeClientModel.Recipe" />
+          <AssociationSet Name="FK_Recipe_Additions" Association="cakeClientModel.FK_Recipe_Additions">
+            <End Role="Additions" EntitySet="Additions" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Additions1" Association="cakeClientModel.FK_Recipe_Additions1">
+            <End Role="Additions" EntitySet="Additions" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Additions2" Association="cakeClientModel.FK_Recipe_Additions2">
+            <End Role="Additions" EntitySet="Additions" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Creams" Association="cakeClientModel.FK_Recipe_Creams">
+            <End Role="Creams" EntitySet="Creams" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Creams1" Association="cakeClientModel.FK_Recipe_Creams1">
+            <End Role="Creams" EntitySet="Creams" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Creams2" Association="cakeClientModel.FK_Recipe_Creams2">
+            <End Role="Creams" EntitySet="Creams" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Crusts" Association="cakeClientModel.FK_Recipe_Crusts">
+            <End Role="Crusts" EntitySet="Crusts" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Crusts1" Association="cakeClientModel.FK_Recipe_Crusts1">
+            <End Role="Crusts" EntitySet="Crusts" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Crusts2" Association="cakeClientModel.FK_Recipe_Crusts2">
+            <End Role="Crusts" EntitySet="Crusts" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Fillings" Association="cakeClientModel.FK_Recipe_Fillings">
+            <End Role="Fillings" EntitySet="Fillings" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Fillings1" Association="cakeClientModel.FK_Recipe_Fillings1">
+            <End Role="Fillings" EntitySet="Fillings" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Fillings2" Association="cakeClientModel.FK_Recipe_Fillings2">
+            <End Role="Fillings" EntitySet="Fillings" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <EntitySet Name="Orders" EntityType="cakeClientModel.Orders" />
+          <EntitySet Name="User" EntityType="cakeClientModel.User" />
+          <AssociationSet Name="FK_Orders_Recipe" Association="cakeClientModel.FK_Orders_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_User" Association="cakeClientModel.FK_Orders_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_User" Association="cakeClientModel.FK_Recipe_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Crusts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Recipe" Relationship="cakeClientModel.FK_Recipe_Crusts" FromRole="Crusts" ToRole="Recipe" />
+          <NavigationProperty Name="Recipe1" Relationship="cakeClientModel.FK_Recipe_Crusts1" FromRole="Crusts" ToRole="Recipe" />
+          <NavigationProperty Name="Recipe2" Relationship="cakeClientModel.FK_Recipe_Crusts2" FromRole="Crusts" ToRole="Recipe" />
+          </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypeCrust1" Type="Int32" />
+          <Property Name="TypeCrust2" Type="Int32" />
+          <Property Name="TypeCrust3" Type="Int32" />
+          <Property Name="TypeFilling1" Type="Int32" />
+          <Property Name="TypeFilling2" Type="Int32" />
+          <Property Name="TypeFilling3" Type="Int32" />
+          <Property Name="TypeCream1" Type="Int32" />
+          <Property Name="TypeCream2" Type="Int32" />
+          <Property Name="TypeCream3" Type="Int32" />
+          <Property Name="TypeAddition1" Type="Int32" />
+          <Property Name="TypeAddition2" Type="Int32" />
+          <Property Name="TypeAddition3" Type="Int32" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Additions" Relationship="cakeClientModel.FK_Recipe_Additions" FromRole="Recipe" ToRole="Additions" />
+          <NavigationProperty Name="Additions1" Relationship="cakeClientModel.FK_Recipe_Additions1" FromRole="Recipe" ToRole="Additions" />
+          <NavigationProperty Name="Additions2" Relationship="cakeClientModel.FK_Recipe_Additions2" FromRole="Recipe" ToRole="Additions" />
+          <NavigationProperty Name="Creams" Relationship="cakeClientModel.FK_Recipe_Creams" FromRole="Recipe" ToRole="Creams" />
+          <NavigationProperty Name="Creams1" Relationship="cakeClientModel.FK_Recipe_Creams1" FromRole="Recipe" ToRole="Creams" />
+          <NavigationProperty Name="Creams2" Relationship="cakeClientModel.FK_Recipe_Creams2" FromRole="Recipe" ToRole="Creams" />
+          <NavigationProperty Name="Crusts" Relationship="cakeClientModel.FK_Recipe_Crusts" FromRole="Recipe" ToRole="Crusts" />
+          <NavigationProperty Name="Crusts1" Relationship="cakeClientModel.FK_Recipe_Crusts1" FromRole="Recipe" ToRole="Crusts" />
+          <NavigationProperty Name="Crusts2" Relationship="cakeClientModel.FK_Recipe_Crusts2" FromRole="Recipe" ToRole="Crusts" />
+          <NavigationProperty Name="Fillings" Relationship="cakeClientModel.FK_Recipe_Fillings" FromRole="Recipe" ToRole="Fillings" />
+          <NavigationProperty Name="Fillings1" Relationship="cakeClientModel.FK_Recipe_Fillings1" FromRole="Recipe" ToRole="Fillings" />
+          <NavigationProperty Name="Fillings2" Relationship="cakeClientModel.FK_Recipe_Fillings2" FromRole="Recipe" ToRole="Fillings" />
+          <NavigationProperty Name="Orders" Relationship="cakeClientModel.FK_Orders_Recipe" FromRole="Recipe" ToRole="Orders" />
+          <NavigationProperty Name="User" Relationship="cakeClientModel.FK_Recipe_User" FromRole="Recipe" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Recipe_Additions">
+          <End Type="cakeClientModel.Additions" Role="Additions" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Additions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeAddition1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Additions1">
+          <End Type="cakeClientModel.Additions" Role="Additions" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Additions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeAddition2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Additions2">
+          <End Type="cakeClientModel.Additions" Role="Additions" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Additions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeAddition3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Creams">
+          <End Type="cakeClientModel.Creams" Role="Creams" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCream1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Creams1">
+          <End Type="cakeClientModel.Creams" Role="Creams" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCream2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Creams2">
+          <End Type="cakeClientModel.Creams" Role="Creams" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCream3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Crusts">
+          <End Type="cakeClientModel.Crusts" Role="Crusts" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crusts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCrust1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Crusts1">
+          <End Type="cakeClientModel.Crusts" Role="Crusts" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crusts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCrust2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Crusts2">
+          <End Type="cakeClientModel.Crusts" Role="Crusts" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Crusts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeCrust3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Fillings">
+          <End Type="cakeClientModel.Fillings" Role="Fillings" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fillings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeFilling1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Fillings1">
+          <End Type="cakeClientModel.Fillings" Role="Fillings" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fillings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeFilling2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Fillings2">
+          <End Type="cakeClientModel.Fillings" Role="Fillings" Multiplicity="0..1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fillings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="TypeFilling3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="IdRecipe" Type="Int32" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Recipe" Relationship="cakeClientModel.FK_Orders_Recipe" FromRole="Orders" ToRole="Recipe" />
+          <NavigationProperty Name="User" Relationship="cakeClientModel.FK_Orders_User" FromRole="Orders" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="cakeClientModel.FK_Orders_User" FromRole="User" ToRole="Orders" />
+          <NavigationProperty Name="Recipe" Relationship="cakeClientModel.FK_Recipe_User" FromRole="User" ToRole="Recipe" />
+        </EntityType>
+        <Association Name="FK_Orders_Recipe">
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="1" />
+          <End Type="cakeClientModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IdRecipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_User">
+          <End Type="cakeClientModel.User" Role="User" Multiplicity="1" />
+          <End Type="cakeClientModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_User">
+          <End Type="cakeClientModel.User" Role="User" Multiplicity="1" />
+          <End Type="cakeClientModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище cakeClientModelContainer" CdmEntityContainer="cakeClientEntities">
+          <EntitySetMapping Name="Additions">
+            <EntityTypeMapping TypeName="cakeClientModel.Additions">
+              <MappingFragment StoreEntitySet="Additions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Creams">
+            <EntityTypeMapping TypeName="cakeClientModel.Creams">
+              <MappingFragment StoreEntitySet="Creams">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fillings">
+            <EntityTypeMapping TypeName="cakeClientModel.Fillings">
+              <MappingFragment StoreEntitySet="Fillings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="cakeClientModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище cakeClientModel.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище cakeClientModel.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище cakeClientModel.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище cakeClientModel.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="cakeClientModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище cakeClientModel.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="cakeClientModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище cakeClientModel.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище cakeClientModel.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Crusts">
+            <EntityTypeMapping TypeName="cakeClientModel.Crusts">
+              <MappingFragment StoreEntitySet="Crusts">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recipe">
+            <EntityTypeMapping TypeName="cakeClientModel.Recipe">
+              <MappingFragment StoreEntitySet="Recipe">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="TypeAddition3" ColumnName="TypeAddition3" />
+                <ScalarProperty Name="TypeAddition2" ColumnName="TypeAddition2" />
+                <ScalarProperty Name="TypeAddition1" ColumnName="TypeAddition1" />
+                <ScalarProperty Name="TypeCream3" ColumnName="TypeCream3" />
+                <ScalarProperty Name="TypeCream2" ColumnName="TypeCream2" />
+                <ScalarProperty Name="TypeCream1" ColumnName="TypeCream1" />
+                <ScalarProperty Name="TypeFilling3" ColumnName="TypeFilling3" />
+                <ScalarProperty Name="TypeFilling2" ColumnName="TypeFilling2" />
+                <ScalarProperty Name="TypeFilling1" ColumnName="TypeFilling1" />
+                <ScalarProperty Name="TypeCrust3" ColumnName="TypeCrust3" />
+                <ScalarProperty Name="TypeCrust2" ColumnName="TypeCrust2" />
+                <ScalarProperty Name="TypeCrust1" ColumnName="TypeCrust1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="cakeClientModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="IdRecipe" ColumnName="IdRecipe" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="cakeClientModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
